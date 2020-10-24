@@ -14,7 +14,7 @@ export default function MainScreen() {
       <Button color="red" title="Quiz開始！" 
         onPress={() => navigate('Quiz')} />
       <View>
-        <Button onPress={onPressButton} title="表示" />
+        <Button onPress={onPressButton} title="ログ表示" />
         <Button onPress={handleClearButton} title="クリア" />
       </View>
     </View>

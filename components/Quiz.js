@@ -5,6 +5,7 @@ import {Card, Input} from 'react-native-elements';
 import { RadioButton } from 'react-native-paper';
 
 import store from '../modules/store';
+import questions from '../modules/questions';
 
 export default function Quiz(props) {
   const q = props.route.params;
@@ -39,7 +40,7 @@ export default function Quiz(props) {
 }
 
 function quizStyle(q, index, checked) {
-  if (checked && q.correctAnswer === index) {
+  if (checked !== undefined && q.correctAnswer === index) {
     return commonStyles.quizCorrect;
   } else {
     return null;
@@ -50,5 +51,18 @@ function handleCheck(q, setChecked,index) {
   const checkedStore = store().checked;
   checkedStore[q.title] = index;
   setChecked(index);
+  // calcScore();
   console.log(store());
 }
+
+// function calcScore() {
+//   let correct = 0;
+//   let score = 0;
+//   questions().forEach(q => {
+//     if(q.correctAnswer === store().checked[q.title]) {
+//       correct += 1;
+//     }
+//   });
+//   score = parseInt(100 * (correct / questions().length));
+//   store().score = score;
+// }

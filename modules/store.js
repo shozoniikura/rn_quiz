@@ -3,7 +3,6 @@ clearStore();
 
 export function clearStore() {
   _store = {
-    score: null,
     checked: {},
   };
 }
