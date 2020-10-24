@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Main from './screens/Main'
+import Quiz from './screens/Quiz'
 
 export default function App() {
   return (
@@ -10,7 +11,8 @@ export default function App() {
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Open up App.js to start working on your app!</Text>
       </View>
-      <Main/>
+      <Main />
+      <Quiz />
     </View>
   );
 }
