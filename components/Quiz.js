@@ -11,6 +11,7 @@ export default function Quiz(props) {
   const q = props.route.params;
   const checkedStore = store().checked;
   const [checked, setChecked] = React.useState(checkedStore[q.title]);
+  const [correct, setCorrect] = React.useState(undefined);
   return (
     <View>
       <Card>
@@ -23,7 +24,7 @@ export default function Quiz(props) {
               <View style={quizStyle(q,index,checked)}>
                 <RadioButton value={index}
                   status={ checked === index ? 'checked' : 'unchecked' }
-                  onPress={() => handleCheck(q, setChecked,index)}
+                  onPress={() => handleCheck(q,index, setChecked, setCorrect)}
                   />
                 <Text>{item.title}</Text>
               </View>
@@ -33,7 +34,7 @@ export default function Quiz(props) {
 
       </Card>
       <Card>
-        <Text>{checkedStore[q.title]}</Text>
+        <Text>{status(correct)}</Text>
       </Card>
     </View>
   );
@@ -47,12 +48,22 @@ function quizStyle(q, index, checked) {
   }
 }
 
-function handleCheck(q, setChecked,index) {
+function status(correct) {
+  if (correct !== undefined) {
+    if (correct) {
+      return "正解";
+    } else {
+      return "不正解";
+    }
+  }
+}
+
+function handleCheck(q, index, setChecked, setCorrect) {
   const checkedStore = store().checked;
   checkedStore[q.title] = index;
   setChecked(index);
+  setCorrect(q.correctAnswer === index);
   // calcScore();
-  console.log(store());
 }
 
 // function calcScore() {
