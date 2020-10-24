@@ -7,6 +7,11 @@ const commonStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  quizCorrect: {
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "red",
+  }
 });
 
 export default commonStyles;

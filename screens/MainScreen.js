@@ -11,6 +11,14 @@ export default function MainScreen() {
       <Text>MainScreen</Text>
       <Button color="red" title="Quiz開始！" 
         onPress={() => navigate('Quiz')} />
+      <View>
+        <Button onPress={onPressButton} title="表示" />
+      </View>
     </View>
   );
 }
+
+function onPressButton(_this) {
+  console.log(_this)
+}
+
