@@ -15,15 +15,20 @@ import QuizScreen from './screens/QuizScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
-  // //AppContainerでラップ
-  // const Layout = createAppContainer(Stack);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
         {/* (2) StackNavigator用の画面を定義する */}
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Quiz" component={QuizScreen} />
+        <Stack.Screen 
+          name="Main"
+          component={MainScreen}
+          options={{title: "ホーム"}}
+          />
+        <Stack.Screen
+          name="Quiz"
+          component={QuizScreen}
+          options={{title: "クイズ"}}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   );
