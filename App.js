@@ -11,6 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen';
 import QuizScreen from './screens/QuizScreen';
 
+import store from './modules/store';
+
 // (1) StackNavigatorを生成する
 const Stack = createStackNavigator();
 
@@ -31,16 +33,6 @@ export default function App() {
           />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-  return (
-    <View style={styles.container}>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-      <MainScreen />
-      <QuizScreen />
-    </View>
   );
 }
 

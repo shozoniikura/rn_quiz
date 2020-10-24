@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import commonStyles from '../components/common';
 import {useNavigation} from '@react-navigation/native';
 
+import store, {clearStore} from '../modules/store';
+
 // export default class MainScreen extends Component {
 export default function MainScreen() {
   const {navigate} = useNavigation();
@@ -13,12 +15,15 @@ export default function MainScreen() {
         onPress={() => navigate('Quiz')} />
       <View>
         <Button onPress={onPressButton} title="表示" />
+        <Button onPress={handleClearButton} title="クリア" />
       </View>
     </View>
   );
 }
 
-function onPressButton(_this) {
-  console.log(_this)
+function onPressButton() {
+  console.log(store())
 }
-
+function handleClearButton() {
+  clearStore();
+}
