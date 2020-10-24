@@ -12,9 +12,9 @@ const Tab = createMaterialTopTabNavigator();
 function QuizTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Quiz-1" component={Quiz} />
-      <Tab.Screen name="Quiz-2" component={Quiz} />
-      <Tab.Screen name="Quiz-3" component={Quiz} />
+      <Tab.Screen name="Quiz-1" component={Quiz} initialParams={{title:'abcd'}} />
+      <Tab.Screen name="Quiz-2" component={Quiz} initialParams={{title:'efgh'}} />
+      <Tab.Screen name="Quiz-3" component={Quiz} initialParams={{title:'ijkl'}} />
     </Tab.Navigator>
   );
 }
