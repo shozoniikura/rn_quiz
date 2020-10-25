@@ -1,23 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import commonStyles from '../components/common';
-import {Card, Input} from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { RadioButton } from 'react-native-paper';
 
-import {store} from '../modules/store';
-import questions from '../modules/questions';
-
-const checkedStore = store.checked;
-const correctStore = store.correct;
+import { store } from '../modules/store';
+import { calcScore } from '../screens/MainScreen';
 
 export default function Quiz(props) {
   const q = props.route.params;
   const [checked, setChecked] = React.useState(store.checked[q.title]);
   const [correct, setCorrect] = React.useState(store.correct[q.title]);
-  // const setChecked = () => null;
-  // const setCorrect = () => null;
-  // const checked = store.checked[q.title];
-  // const correct = store.correct[q.title];
   return (
     <View>
       <Card>
@@ -65,12 +58,13 @@ function status(correct) {
 }
 
 function handleCheck(q, index, setChecked, setCorrect) {
-  // const checkedStore = store.checked;
-  store.checked[q.title] = index;
+  // 選択肢を保存する
   setChecked(index);
+  store.checked[q.title] = index;
+  // 正解・不正解を保存する
   const correct = (q.correctAnswer === index);
   setCorrect(correct);
   store.correct[q.title] = correct;
-  console.log(store);
-  // calcScore();
+  // スコアを計算する
+  calcScore();
 }
