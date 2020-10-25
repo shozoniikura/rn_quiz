@@ -11,12 +11,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen';
 import QuizScreen from './screens/QuizScreen';
 
-import store from './modules/store';
+import storeRoot from './modules/store';
 
 // (1) StackNavigatorを生成する
 const Stack = createStackNavigator();
 
 export default function App() {
+  storeRoot();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
