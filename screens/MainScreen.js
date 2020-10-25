@@ -36,7 +36,7 @@ function handleClearButton() {
   setScore(null);
 }
 
-function calcScore() {
+export function calcScore() {
   if (Object.keys(store.checked).length === 0) return;
 
   let correct = Object.values(store.correct).filter(v => v).length
