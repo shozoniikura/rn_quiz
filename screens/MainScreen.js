@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import commonStyles from '../components/common';
 import {useNavigation} from '@react-navigation/native';
 
-import {store, clearStore, scoreIsAvailable} from '../modules/store';
+import {store, clearStore, scoreIsAvailable, corrects} from '../modules/store';
 import questions from '../modules/questions';
 import ScoreCard from '../components/ScoreCard';
 
@@ -50,8 +50,4 @@ export function calcScore() {
   let newScore = parseInt(100 * (correct / questions().length));
   store.score = newScore;
   setScore(newScore);
-}
-
-export function corrects() {
-  return Object.values(store.correct).filter(v => v).length;
 }

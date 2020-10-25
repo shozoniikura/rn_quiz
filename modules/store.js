@@ -30,3 +30,7 @@ export function scoreIsAvailable(_score) {
   else
     return true;
 }
+
+export function corrects() {
+  return Object.values(store.correct).filter(v => v).length;
+}
