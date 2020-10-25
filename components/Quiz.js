@@ -1,17 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import commonStyles from '../components/common';
-import {Card, Input} from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { RadioButton } from 'react-native-paper';
 
-import store from '../modules/store';
-import questions from '../modules/questions';
+import { store } from '../modules/store';
+import { calcScore } from '../screens/MainScreen';
 
 export default function Quiz(props) {
   const q = props.route.params;
-  const checkedStore = store().checked;
-  const [checked, setChecked] = React.useState(checkedStore[q.title]);
-  const [correct, setCorrect] = React.useState(undefined);
+  const [checked, setChecked] = React.useState(store.checked[q.title]);
+  const [correct, setCorrect] = React.useState(store.correct[q.title]);
   return (
     <View>
       <Card>
@@ -24,7 +23,7 @@ export default function Quiz(props) {
               <View style={quizStyle(q,index,checked)}>
                 <RadioButton value={index}
                   status={ checked === index ? 'checked' : 'unchecked' }
-                  onPress={() => handleCheck(q,index, setChecked, setCorrect)}
+                  onPress={() => handleCheck(q, index, setChecked, setCorrect)}
                   />
                 <Text>{item.title}</Text>
               </View>
@@ -59,21 +58,13 @@ function status(correct) {
 }
 
 function handleCheck(q, index, setChecked, setCorrect) {
-  const checkedStore = store().checked;
-  checkedStore[q.title] = index;
+  // 選択肢を保存する
   setChecked(index);
-  setCorrect(q.correctAnswer === index);
-  // calcScore();
+  store.checked[q.title] = index;
+  // 正解・不正解を保存する
+  const correct = (q.correctAnswer === index);
+  setCorrect(correct);
+  store.correct[q.title] = correct;
+  // スコアを計算する
+  calcScore();
 }
-
-// function calcScore() {
-//   let correct = 0;
-//   let score = 0;
-//   questions().forEach(q => {
-//     if(q.correctAnswer === store().checked[q.title]) {
-//       correct += 1;
-//     }
-//   });
-//   score = parseInt(100 * (correct / questions().length));
-//   store().score = score;
-// }

@@ -3,27 +3,51 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import commonStyles from '../components/common';
 import {useNavigation} from '@react-navigation/native';
 
-import store, {clearStore} from '../modules/store';
+import {store, clearStore, scoreIsAvailable, corrects} from '../modules/store';
+import questions from '../modules/questions';
+import ScoreCard from '../components/ScoreCard';
 
-// export default class MainScreen extends Component {
+let score, setScore;
+
 export default function MainScreen() {
+  [score, setScore] = React.useState(store.score);
   const {navigate} = useNavigation();
   return (
     <View style={commonStyles.main}>
-      <Text>MainScreen</Text>
+      <View style={commonStyles.main}>
+        <Text>画面とステートの制御の練習</Text>
+      </View>
+      <View style={commonStyles.main2}>
       <Button color="red" title="Quiz開始！" 
-        onPress={() => navigate('Quiz')} />
+        onPress={() => {setScore(null); navigate('Quiz')}} />
       <View>
-        <Button onPress={onPressButton} title="ログ表示" />
-        <Button onPress={handleClearButton} title="クリア" />
+        { scoreIsAvailable(score) ?
+          <View>
+            <ScoreCard score={score} correct={corrects()} questions={questions()} />
+            <Button onPress={handleClearButton} title="クリア" />
+          </View> :
+          <View />
+        }
+      </View>
       </View>
     </View>
   );
 }
 
 function onPressButton() {
-  console.log(store())
+  calcScore();
 }
+
 function handleClearButton() {
   clearStore();
+  setScore(null);
+}
+
+export function calcScore() {
+  if (Object.keys(store.checked).length === 0) return;
+
+  let correct = corrects();
+  let newScore = parseInt(100 * (correct / questions().length));
+  store.score = newScore;
+  setScore(newScore);
 }

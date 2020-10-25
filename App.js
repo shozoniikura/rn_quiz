@@ -1,9 +1,6 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-// import { createBottomTabNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
-// import { createStackNavigator } from '@react-navigation/stack';
+
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -11,12 +8,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen';
 import QuizScreen from './screens/QuizScreen';
 
-import store from './modules/store';
+// 全体の値を保管するストア
+import storeRoot from './modules/store';
 
 // (1) StackNavigatorを生成する
 const Stack = createStackNavigator();
 
 export default function App() {
+  storeRoot();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
@@ -35,12 +34,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#aaa',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

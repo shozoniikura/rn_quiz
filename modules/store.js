@@ -1,12 +1,36 @@
-let _store;
-clearStore();
+import React from 'react';
 
-export function clearStore() {
-  _store = {
+export let store = init();
+export let setStore;
+export let score;
+export let setScore;
+
+function init() {
+  return {
     checked: {},
+    correct: {},
+    score: null,
   };
 }
 
-export default function store() {
-  return _store;
+export function clearStore() {
+  setStore(init());
+  setScore(store.score);
+}
+
+export default function storeRoot() {
+  [store, setStore] = React.useState(init());
+  [score, setScore] = React.useState(null);
+  return store;
+}
+
+export function scoreIsAvailable(_score) {
+  if (_score == null)
+    return false;
+  else
+    return true;
+}
+
+export function corrects() {
+  return Object.values(store.correct).filter(v => v).length;
 }
